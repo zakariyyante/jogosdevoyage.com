@@ -1,26 +1,109 @@
 @import "tailwindcss";
 
+@theme {
+  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --font-mono: var(--font-geist-mono), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  --font-serif: var(--font-serif), ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+
+  --color-gaming-bg: #0b0e14;
+  --color-gaming-surface: #161b22;
+  --color-gaming-primary: #9d4edd;
+  --color-gaming-secondary: #00d4ff;
+  --color-gaming-accent: #39ff14;
+  --color-gaming-text: #e6edf3;
+  --color-gaming-text-muted: #8b949e;
+}
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: var(--color-gaming-bg);
+  --foreground: var(--color-gaming-text);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@layer base {
+  body {
+    @apply bg-gaming-bg text-gaming-text selection:bg-gaming-primary/30 selection:text-white;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+.gaming-gradient {
+  background: linear-gradient(135deg, var(--color-gaming-primary) 0%, var(--color-gaming-secondary) 100%);
+}
+
+.text-gradient {
+  background: linear-gradient(135deg, var(--color-gaming-primary) 0%, var(--color-gaming-secondary) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+}
+
+.gaming-grid {
+  background-image: 
+    linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+.gaming-glow {
+  box-shadow: 0 0 20px rgba(157, 78, 221, 0.3);
+}
+
+.gaming-glow-secondary {
+  box-shadow: 0 0 20px rgba(0, 212, 255, 0.3);
+}
+
+.gaming-glow-hover:hover {
+  box-shadow: 0 0 30px rgba(0, 212, 255, 0.5);
+}
+
+.glass-panel {
+  @apply bg-gaming-surface/60 backdrop-blur-xl border border-white/5;
+}
+
+.gaming-card {
+  @apply relative overflow-hidden rounded-2xl bg-gaming-surface border border-white/5 transition-all duration-300;
+}
+
+.gaming-card::before {
+  content: '';
+  @apply absolute inset-0 bg-gradient-to-br from-white/5 to-transparent opacity-0 transition-opacity duration-300;
+}
+
+.gaming-card:hover::before {
+  @apply opacity-100;
+}
+
+.gaming-button {
+  @apply relative inline-flex items-center justify-center px-8 py-4 rounded-xl font-black tracking-widest uppercase transition-all duration-300 overflow-hidden;
+}
+
+.gaming-button-primary {
+  background: linear-gradient(135deg, var(--color-gaming-primary) 0%, var(--color-gaming-secondary) 100%);
+  @apply text-white shadow-xl shadow-gaming-primary/20 hover:scale-105 active:scale-95;
+}
+
+.gaming-button-hover-gradient:hover {
+  background: linear-gradient(135deg, var(--color-gaming-primary) 0%, var(--color-gaming-secondary) 100%);
+}
+
+.gaming-button-outline {
+  @apply bg-gaming-surface/60 backdrop-blur-xl border border-white/10 text-white hover:bg-white/5 hover:border-white/20;
+}
+
+@keyframes fade-in {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes scan {
+  from { top: 0%; }
+  to { top: 100%; }
+}
+
+.animate-fade-in {
+  animation: fade-in 0.6s ease-out forwards;
+}
+
+.animate-scan {
+  animation: scan 3s linear infinite;
 }
