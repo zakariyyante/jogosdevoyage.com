@@ -59,15 +59,35 @@ export default function Home() {
           <div className="flex flex-col md:flex-row md:items-end justify-between mb-24 gap-10">
             <div className="max-w-2xl">
               <h2 className="text-4xl md:text-6xl font-black mb-6 italic tracking-tight">
-                MARCAS <span className="text-gradient">RECOMENDADAS</span>
+                CATEGORIAS PARA <span className="text-gradient">CADA VONTADE</span>
               </h2>
               <p className="text-lg text-gaming-text-muted leading-relaxed font-medium">
-                Seleção exclusiva de plataformas licenciadas em Portugal. Performance, segurança e bónus analisados para a melhor experiência.
+                Competitivo, criação, aventura ou social: encontra o ritmo certo e abre o link oficial.
               </p>
+            </div>
+            <div className="flex gap-3 flex-wrap">
+              {['COMPETITIVO E RANKED', 'CRIAÇÃO E SANDBOX', 'AVENTURA E EXPLORAÇÃO'].map((filter, i) => (
+                <button key={filter} className={`px-6 py-2.5 rounded-lg text-[10px] font-black tracking-widest uppercase italic transition-all ${i === 0 ? 'bg-gaming-secondary text-black shadow-lg shadow-gaming-secondary/20' : 'bg-white/5 border border-white/10 text-gaming-text-muted hover:bg-white/10'}`}>
+                  {filter}
+                </button>
+              ))}
             </div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-20">
+            {[
+              { title: "Competitivo e ranked", desc: "Partidas curtas, meta em movimento e foco em equipa ou precisão." },
+              { title: "Criação e sandbox", desc: "Mundos partilhados onde jogas ou constróis ao teu ritmo." },
+              { title: "Aventura e exploração", desc: "Mapas grandes, personagens e progressão ao longo do tempo." },
+            ].map((cat) => (
+              <div key={cat.title} className="glass-panel p-6 rounded-2xl border-white/5">
+                <h4 className="font-black text-white mb-2 uppercase italic text-sm">{cat.title}</h4>
+                <p className="text-xs text-gaming-text-muted leading-relaxed">{cat.desc}</p>
+              </div>
+            ))}
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
             {games.map((game) => (
               <GameCard key={game.id} game={game} />
             ))}
@@ -133,7 +153,7 @@ export default function Home() {
             UM CATÁLOGO DE<br /><span className="text-gradient">PROPÓSITO LIMITADO</span>
           </h2>
           <p className="text-xl text-gaming-text-muted max-w-2xl mx-auto mb-16 leading-relaxed font-medium">
-            Marcas reconhecidas em Portugal, com comunidades reais — em vez de dezenas de entradas esquecidas.
+            Seis títulos reconhecidos em Portugal, com comunidades reais — em vez de dezenas de entradas esquecidas.
           </p>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-left max-w-4xl mx-auto">
             <div className="glass-panel p-8 rounded-2xl border-white/5">
